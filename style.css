@@ -1,0 +1,72 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  border: solid 2px black;
+  height: 500px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+}
+
+.display {
+  border: solid 2px black;
+  flex: 1.2;
+  font-size: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.numpad {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+}
+.numpad .first-row {
+  flex: 1;
+  display: flex;
+}
+
+.first-row button {
+  flex: 0 1 auto;
+  font-size: 30px;
+  width: 25%;
+}
+
+.division {
+  margin-right: auto;
+}
+
+.empty {
+  flex: 1 1 auto;
+  width: 50%;
+}
+
+.numpad .middle {
+  flex: 3;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.middle button {
+  flex: 1 1 auto;
+  font-size: 30px;
+  width: 25%;
+}
+
+.numpad .last-row {
+  flex: 1;
+  display: flex;
+}
+
+.last-row button {
+  flex: 1 1 auto;
+  width: 25%;
+  font-size: 30px;
+}
