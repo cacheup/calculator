@@ -1,16 +1,22 @@
 const display = document.querySelector('.display');
 display.textContent = '0';
 
-const buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', populate));
+let operand = NaN;
+let equalsBtnClicked = false;
+
+const digits = document.querySelectorAll('.digit');
+digits.forEach(digit => digit.addEventListener('click', populate));
 
 function populate(e) {
-  if(!isNaN(e.target.textContent)){
-    if(display.textContent == '0') {
-      if(e.target.textContent != '0')
+  if(equalsBtnClicked == true){
+    display.textContent = e.target.textContent;
+    equalsBtnClicked = false;
+  }
+  else{
+    if(display.textContent == '0'){
       display.textContent = e.target.textContent;
     }
-    else {
+    else{
       display.textContent += e.target.textContent;
     }
   }
