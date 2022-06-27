@@ -13,6 +13,9 @@ operators.forEach(operator => operator.addEventListener('click', operateCalc));
 const equals = document.querySelector('.equals');
 equals.addEventListener('click', evaluate);
 
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', clearCalc);
+
 function populate(e) {
   if(displayModified == true){
     if(display.textContent == '0'){
@@ -59,6 +62,13 @@ function evaluate(e) {
       displayModified = false;
     }
   }
+}
+
+function clearCalc(e) {
+  display.textContent = '0';
+  operand = NaN;
+  operator = '';
+  displayModified = false;
 }
 
 function add(num1,num2) {
