@@ -10,6 +10,9 @@ let operator = '';
 const operators = document.querySelectorAll('.operator');
 operators.forEach(operator => operator.addEventListener('click', operateCalc));
 
+const equals = document.querySelector('.equals');
+equals.addEventListener('click', evaluate);
+
 function populate(e) {
   if(displayModified == true){
     if(display.textContent == '0'){
@@ -42,6 +45,18 @@ function operateCalc(e) {
     if(isNaN(operand)){
       operand = +display.textContent;
       operator = e.target.textContent;
+    }
+  }
+}
+
+function evaluate(e) {
+  if(displayModified == true){
+    if(!isNaN(operand)){
+      operand = operate(operand, +display.textContent, operator);
+      display.textContent = operand.toString();
+      operand = NaN;
+      operator = '';
+      displayModified = false;
     }
   }
 }
