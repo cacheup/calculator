@@ -39,7 +39,18 @@ function operateCalc(e) {
     }
     else{
       operand = operate(operand, +display.textContent, operator);
-      display.textContent = operand.toString();
+      if(!Number.isInteger(operand)){
+        operand = operand.toFixed(3);
+        operand = +operand;
+      }
+      if(operand.toString().length > 11){
+        operand = operand.toExponential(5);
+        display.textContent = operand;
+        operand = +operand;
+      }
+      else{
+        display.textContent = operand.toString();
+      } 
       operator = e.target.textContent;
     }
     displayModified = false;
@@ -56,7 +67,17 @@ function evaluate(e) {
   if(displayModified == true){
     if(!isNaN(operand)){
       operand = operate(operand, +display.textContent, operator);
-      display.textContent = operand.toString();
+      if(!Number.isInteger(operand)){
+        operand = operand.toFixed(3);
+        operand = +operand;
+      }
+      if(operand.toString().length > 11){
+        operand = operand.toExponential(5);
+        display.textContent = operand;
+      }
+      else{
+        display.textContent = operand.toString();
+      }
       operand = NaN;
       operator = '';
       displayModified = false;
