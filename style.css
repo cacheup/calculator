@@ -45,7 +45,7 @@ body {
 
 .empty {
   flex: 1 1 auto;
-  width: 50%;
+  width: 25%;
 }
 
 .numpad .middle {

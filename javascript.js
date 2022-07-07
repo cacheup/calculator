@@ -16,6 +16,9 @@ equals.addEventListener('click', evaluate);
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', clearCalc);
 
+const decimal = document.querySelector('.decimal');
+decimal.addEventListener('click', punctuate);
+
 function populate(e) {
   if(displayModified == true){
     if(display.textContent == '0'){
@@ -54,11 +57,13 @@ function operateCalc(e) {
       operator = e.target.textContent;
     }
     displayModified = false;
+    decimal.disabled = false;
   }
   else{
     if(isNaN(operand)){
       operand = +display.textContent;
       operator = e.target.textContent;
+      decimal.disabled = false;
     }
   }
 }
@@ -90,6 +95,19 @@ function clearCalc(e) {
   operand = NaN;
   operator = '';
   displayModified = false;
+  decimal.disabled = false;
+}
+
+function punctuate(e) {
+  if(displayModified == true){
+    display.textContent += ".";
+    decimal.disabled = true;
+  }
+  else{
+    display.textContent = '0.';
+    decimal.disabled = true;
+    displayModified = true;
+  }
 }
 
 function add(num1,num2) {
