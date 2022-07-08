@@ -39,10 +39,6 @@ body {
   width: 25%;
 }
 
-.division {
-  margin-right: auto;
-}
-
 .empty {
   flex: 1 1 auto;
   width: 25%;

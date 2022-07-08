@@ -19,6 +19,9 @@ clear.addEventListener('click', clearCalc);
 const decimal = document.querySelector('.decimal');
 decimal.addEventListener('click', punctuate);
 
+const backspace = document.querySelector('.backspace');
+backspace.addEventListener('click', deleteChar);
+
 function populate(e) {
   if(displayModified == true){
     if(display.textContent == '0'){
@@ -107,6 +110,20 @@ function punctuate(e) {
     display.textContent = '0.';
     decimal.disabled = true;
     displayModified = true;
+  }
+}
+
+function deleteChar(e) {
+  if(displayModified == true){
+    if(display.textContent.length != 1){
+      if(display.textContent.charAt(display.textContent.length - 1) == '.'){
+        decimal.disabled = false;
+      }
+      display.textContent = display.textContent.slice(0, display.textContent.length - 1);
+    }
+    else{
+      display.textContent = '0';
+    }
   }
 }
 
