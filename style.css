@@ -3,6 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: #E7E7E7;
 }
 
 .container {
@@ -12,6 +13,9 @@ body {
   display: flex;
   flex-direction: column;
   flex: 0 1 auto;
+  background-color: #8084b4;
+  color: #1F262A;
+  border-radius: 10px;
 }
 
 .display {
@@ -21,6 +25,11 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  border-radius: 10px;
+  background-color: #A8A9AD;
+  border-color: #CFCFCF;
+  border-width: 10px;
+  border-style: outset;
 }
 
 .numpad {
@@ -65,4 +74,21 @@ body {
   flex: 1 1 auto;
   width: 25%;
   font-size: 30px;
+}
+
+button {
+  border-radius: 8px;
+  background-color: #CFCFCF;
+  border-color: #E7E7E7;
+  border-width: 6px;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+.operator {
+  background-color: #8B4513;
+  color: #E7E7E7;
+  border-color: #6D3106;
 }
