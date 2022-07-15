@@ -92,3 +92,7 @@ button:hover {
   color: #E7E7E7;
   border-color: #6D3106;
 }
+
+.pressed {
+  filter: brightness(0.8);
+}

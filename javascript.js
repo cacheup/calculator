@@ -34,6 +34,10 @@ function populate(e) {
   else{
     display.textContent = e.target.textContent;
     displayModified = true;
+    if(operator != ''){
+      const operatorElem = document.querySelector(`.${getOperatorName(operator)}`);
+      operatorElem.classList.remove('pressed'); 
+    }
   }
 }
 
@@ -41,7 +45,6 @@ function operateCalc(e) {
   if(displayModified == true){
     if(isNaN(operand)){
       operand = +display.textContent;
-      operator = e.target.textContent;
     }
     else{
       operand = operate(operand, +display.textContent, operator);
@@ -57,16 +60,18 @@ function operateCalc(e) {
       else{
         display.textContent = operand.toString();
       } 
-      operator = e.target.textContent;
     }
     displayModified = false;
     decimal.disabled = false;
+    operator = e.target.textContent;
+    e.target.classList.add('pressed');
   }
   else{
     if(isNaN(operand)){
       operand = +display.textContent;
       operator = e.target.textContent;
       decimal.disabled = false;
+      e.target.classList.add('pressed');
     }
   }
 }
@@ -96,6 +101,10 @@ function evaluate(e) {
 function clearCalc(e) {
   display.textContent = '0';
   operand = NaN;
+  if(operator != ''){
+    const operatorElem = document.querySelector(`.${getOperatorName(operator)}`);
+    operatorElem.classList.remove('pressed');
+  }
   operator = '';
   displayModified = false;
   decimal.disabled = false;
@@ -124,6 +133,19 @@ function deleteChar(e) {
     else{
       display.textContent = '0';
     }
+  }
+}
+
+function getOperatorName(operatorChar) {
+  switch (operatorChar) {
+    case '+':
+      return 'addition';
+    case '-':
+      return 'subtraction';
+    case 'x':
+      return 'multiplication';
+    case '÷':
+      return 'division';
   }
 }
 
