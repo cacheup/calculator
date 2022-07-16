@@ -3,12 +3,16 @@ display.textContent = '0';
 
 let displayModified = false;
 const digits = document.querySelectorAll('.digit');
-digits.forEach(digit => digit.addEventListener('click', populate));
+digits.forEach(digit => digit.addEventListener('click', function(e) {
+  populate(e.target);
+}));
 
 let operand = NaN;
 let operator = '';
 const operators = document.querySelectorAll('.operator');
-operators.forEach(operator => operator.addEventListener('click', operateCalc));
+operators.forEach(operator => operator.addEventListener('click', function(e) {
+  operateCalc(e.target);
+}));
 
 const equals = document.querySelector('.equals');
 equals.addEventListener('click', evaluate);
@@ -22,17 +26,41 @@ decimal.addEventListener('click', punctuate);
 const backspace = document.querySelector('.backspace');
 backspace.addEventListener('click', deleteChar);
 
-function populate(e) {
+window.addEventListener('keydown', function(e) {
+  const calcBtn = document.querySelector(`button[data-key='${e.key}'`);
+  if(calcBtn){
+    if(calcBtn.classList.contains('backspace')){
+      deleteChar();
+    }
+    else if(calcBtn.classList.contains('digit')){
+      populate(calcBtn);
+    }
+    else if(calcBtn.classList.contains('operator')){
+      operateCalc(calcBtn);
+    }
+    else if(calcBtn.classList.contains('equals')){
+      evaluate();
+    }
+    else if(calcBtn.classList.contains('clear')){
+      clearCalc();
+    }
+    else if(calcBtn.classList.contains('decimal')){
+      punctuate();
+    }
+  } 
+});
+
+function populate(elem) {
   if(displayModified == true){
     if(display.textContent == '0'){
-      display.textContent = e.target.textContent;
+      display.textContent = elem.textContent;
     }
     else{
-      display.textContent += e.target.textContent;
+      display.textContent += elem.textContent;
     }
   }
   else{
-    display.textContent = e.target.textContent;
+    display.textContent = elem.textContent;
     displayModified = true;
     if(operator != ''){
       const operatorElem = document.querySelector(`.${getOperatorName(operator)}`);
@@ -41,7 +69,7 @@ function populate(e) {
   }
 }
 
-function operateCalc(e) {
+function operateCalc(elem) {
   if(displayModified == true){
     if(isNaN(operand)){
       operand = +display.textContent;
@@ -63,20 +91,20 @@ function operateCalc(e) {
     }
     displayModified = false;
     decimal.disabled = false;
-    operator = e.target.textContent;
-    e.target.classList.add('pressed');
+    operator = elem.textContent;
+    elem.classList.add('pressed');
   }
   else{
     if(isNaN(operand)){
       operand = +display.textContent;
-      operator = e.target.textContent;
+      operator = elem.textContent;
       decimal.disabled = false;
-      e.target.classList.add('pressed');
+      elem.classList.add('pressed');
     }
   }
 }
 
-function evaluate(e) {
+function evaluate() {
   if(displayModified == true){
     if(!isNaN(operand)){
       operand = operate(operand, +display.textContent, operator);
@@ -98,7 +126,7 @@ function evaluate(e) {
   }
 }
 
-function clearCalc(e) {
+function clearCalc() {
   display.textContent = '0';
   operand = NaN;
   if(operator != ''){
@@ -110,7 +138,7 @@ function clearCalc(e) {
   decimal.disabled = false;
 }
 
-function punctuate(e) {
+function punctuate() {
   if(displayModified == true){
     display.textContent += ".";
     decimal.disabled = true;
@@ -122,7 +150,7 @@ function punctuate(e) {
   }
 }
 
-function deleteChar(e) {
+function deleteChar() {
   if(displayModified == true){
     if(display.textContent.length != 1){
       if(display.textContent.charAt(display.textContent.length - 1) == '.'){
